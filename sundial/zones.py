@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from datetime import datetime
-from itertools import imap, groupby
+from itertools import groupby
 
 from django.utils.functional import lazy
 from django.utils import six
@@ -22,7 +22,7 @@ _lazy_pretty_zone = lazy(_pretty_zone, six.text_type)
 
 
 def _grouped_choices(zones):
-    groups = groupby(imap(lambda z: z.split('/'), zones), lambda z: z[0])
+    groups = groupby(six.moves.map(lambda z: z.split('/'), zones), lambda z: z[0])
     for group, regions in groups:
         yield (_(group), list(('/'.join(region), _lazy_pretty_zone(region)) for region in regions))
 

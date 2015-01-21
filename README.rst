@@ -12,6 +12,6 @@ Django application providing database, form fields and middleware for timezone s
 Installation
 ------------
 
-    .. code:: sh
+.. code:: sh
 
-        pip install django-sundial
+    pip install django-sundial

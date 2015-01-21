@@ -9,7 +9,6 @@ else:
 
 import django
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.test import TestCase
 import pytz
 
@@ -71,8 +70,11 @@ class TimezoneFieldTests(TestCase):
         self.assertEqual(args, [])
         self.assertEqual(kwargs, {'max_length': repr(30), 'default': repr(default)})
 
-    def test_to_python(self):
-        self.assertRaises(ValidationError, TimezoneField().to_python, 'invalid')
+    def test_full_clean(self):
+        obj = TimezoneModel(timezone=default_timezone.zone)
+        obj.full_clean()
+        obj = TimezoneModel(timezone=default_timezone)
+        obj.full_clean()
 
     def test_formfield(self):
         field = TimezoneField(default='America/Montreal')

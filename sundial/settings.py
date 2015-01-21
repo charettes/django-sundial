@@ -1,12 +1,17 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-import pytz
+
+from .zones import COMMON_GROUPED_CHOICES
+
+
+__all__ = ['TIMEZONE_SESSION_KEY', 'TIMEZONE_CHOICES']
 
 
 TIMEZONE_SESSION_KEY = getattr(
-    settings, 'GREENWICH_TIMEZONE_SESSION_KEY', '_timezone'
+    settings, 'SUNDIAL_TIMEZONE_SESSION_KEY', '_timezone'
 )
+
 TIMEZONE_CHOICES = getattr(
-    settings, 'GREENWICH_TIMEZONE_CHOICES', list(zip(pytz.common_timezones, pytz.common_timezones))
+    settings, 'SUNDIAL_TIMEZONE_CHOICES', COMMON_GROUPED_CHOICES
 )

@@ -31,6 +31,12 @@ class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
             value = coerce_timezone(value)
         return value
 
+    def validate(self, value, model_instance):
+        super(TimezoneField, self).validate(force_text(value), model_instance)
+
+    def run_validators(self, value):
+        super(TimezoneField, self).run_validators(force_text(value))
+
     def get_prep_value(self, value):
         if value is not None:
             value = force_text(value)

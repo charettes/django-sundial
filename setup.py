@@ -5,22 +5,18 @@ from setuptools import find_packages, setup
 import sundial
 
 
-version = sundial.__version__
-requirements = ['django>=1.6', 'pytz']
+with open('README.rst') as file_:
+    long_description = file_.read()
 
 setup(
     name='django-sundial',
-    version=version,
+    version=sundial.__version__,
+    description='Django application providing database, form fields and middleware for timezone support.',
+    long_description=long_description,
     url='https://github.com/charettes/django-sundial',
     author='Simon Charette.',
     author_email='charette.s+sundial@gmail.com',
-    description='',
     license='MIT',
-    packages=find_packages('sundial'),
-    install_requires=requirements,
-    extras_require={
-        'south': ['south']
-    },
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
@@ -42,4 +38,11 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
+    keywords=['django timezone'],
+    packages=find_packages('sundial'),
+    install_requires=['django>=1.6', 'pytz'],
+    extras_require={
+        'south': ['south'],
+        'tests': ['tox'],
+    },
 )

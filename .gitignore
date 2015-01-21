@@ -1,0 +1,6 @@
+syntax:glob
+*.py[co]
+dist/
+django_sundial.egg-info/*
+.coverage
+.tox

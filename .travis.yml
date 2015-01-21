@@ -1,0 +1,31 @@
+language: python
+
+python:
+  - 2.7
+  - 3.2
+  - 3.3
+  - 3.4
+
+env:
+  - DJANGO=1.6
+  - DJANGO=1.7
+  - DJANGO=1.8
+  - DJANGO=master
+
+matrix:
+  include:
+    - python: 2.6
+      env: DJANGO=1.6
+  exclude:
+    - python: 3.4
+      env: DJANGO=1.6
+  allow_failures:
+    - env: DJANGO=master
+
+install:
+  pip install tox coveralls
+
+script:
+  tox -e `python -c 'import sys,os;print("py%d%d-"%sys.version_info[0:2]+os.environ["DJANGO"])'`
+
+after_success: coveralls

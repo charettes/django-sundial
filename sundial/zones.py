@@ -11,33 +11,34 @@ import pytz
 __all__ = ['COMMON_FLAT_CHOICES', 'COMMON_GROUPED_CHOICES', 'ALL_FLAT_CHOICES', 'ALL_GROUPED_CHOICES']
 
 
-def _pretty_zone(zone):
-    offset = datetime.now(pytz.timezone('/'.join(zone))).strftime("%z")
+def _label_zone(zone):
+    offset = datetime.now(pytz.timezone('/'.join(zone))).strftime('%z')
     return _("%(name)s (GMT%(offset)s)") % {
         'name': _(zone[-1].replace('_', ' ')),
         'offset': offset,
     }
 
-_lazy_pretty_zone = lazy(_pretty_zone, six.text_type)
+_lazy_label_zone = lazy(_label_zone, six.text_type)
 
 
-def _grouped_choices(zones):
+def _group_choices(zones):
     groups = groupby(six.moves.map(lambda z: z.split('/'), zones), lambda z: z[0])
     for group, regions in groups:
-        yield (_(group), list(('/'.join(region), _lazy_pretty_zone(region)) for region in regions))
+        choices = list(
+            ('/'.join(region), _lazy_label_zone(region)) for region in regions
+        )
+        yield _(group), choices
 
 
-def _flatten_choices(choices):
-    for choice, value in choices:
-        if isinstance(value, tuple):
-            for choice, value in value:
-                yield choice, value
-        else:
+def _flatten_grouped_choices(groups):
+    for _group, choices in groups:
+        # yield from choices
+        for choice, value in choices:
             yield choice, value
 
 
-COMMON_GROUPED_CHOICES = list(_grouped_choices(pytz.common_timezones))
-COMMON_FLAT_CHOICES = list(_flatten_choices(COMMON_GROUPED_CHOICES))
+COMMON_GROUPED_CHOICES = list(_group_choices(pytz.common_timezones))
+COMMON_FLAT_CHOICES = list(_flatten_grouped_choices(COMMON_GROUPED_CHOICES))
 
-ALL_GROUPED_CHOICES = list(_grouped_choices(pytz.all_timezones))
-ALL_FLAT_CHOICES = list(_flatten_choices(ALL_GROUPED_CHOICES))
+ALL_GROUPED_CHOICES = list(_group_choices(pytz.all_timezones))
+ALL_FLAT_CHOICES = list(_flatten_grouped_choices(ALL_GROUPED_CHOICES))

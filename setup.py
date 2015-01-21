@@ -19,7 +19,7 @@ setup(
     packages=find_packages('sundial'),
     install_requires=requirements,
     extras_require={
-        ['south']: ['south']
+        'south': ['south']
     },
     classifiers=[
         'Development Status :: 3 - Alpha',

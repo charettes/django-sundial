@@ -1,3 +1,4 @@
 [run]
 source = sundial
 branch = 1
+omit = sundial/versioning.py

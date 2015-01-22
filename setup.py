@@ -39,7 +39,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords=['django timezone'],
-    packages=find_packages('sundial'),
+    packages=find_packages(exclude=['tests', 'tests.*']),
     install_requires=['django>=1.6', 'pytz'],
     extras_require={
         'south': ['south'],

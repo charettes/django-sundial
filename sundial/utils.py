@@ -1,11 +1,15 @@
 from __future__ import unicode_literals
 
 from django.core.exceptions import ValidationError
+from django.conf import settings
 from django.utils.text import force_text
 from django.utils.translation import ugettext_lazy as _
 import pytz
 
-from .settings import TIMEZONE_SESSION_KEY
+
+TIMEZONE_SESSION_KEY = getattr(
+    settings, 'SUNDIAL_TIMEZONE_SESSION_KEY', '_timezone'
+)
 
 
 def set_session_timezone(session, zone):

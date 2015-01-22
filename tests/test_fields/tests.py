@@ -14,6 +14,7 @@ from django.test import TestCase
 import pytz
 
 from sundial.fields import TimezoneField
+from sundial.zones import COMMON_GROUPED_CHOICES
 
 from .models import TimezoneModel
 
@@ -87,5 +88,11 @@ class TimezoneFieldTests(TestCase):
         field = TimezoneField(default='America/Montreal')
         formfield = field.formfield()
         self.assertEqual(formfield.clean(default_timezone.zone), default_timezone)
-        self.assertEqual(formfield.choices, field.choices)
+        self.assertEqual(formfield.initial, 'America/Montreal')
+
+    def test_choices_formfield(self):
+        field = TimezoneField(default='America/Montreal', choices=COMMON_GROUPED_CHOICES)
+        formfield = field.formfield()
+        self.assertEqual(formfield.clean(default_timezone.zone), default_timezone)
+        self.assertEqual(list(formfield.choices), list(field.choices))
         self.assertEqual(formfield.initial, 'America/Montreal')

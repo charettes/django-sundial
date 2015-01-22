@@ -8,7 +8,7 @@ from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 import pytz
 
-__all__ = ['COMMON_FLAT_CHOICES', 'COMMON_GROUPED_CHOICES', 'ALL_FLAT_CHOICES', 'ALL_GROUPED_CHOICES']
+__all__ = ['COMMON_CHOICES', 'COMMON_GROUPED_CHOICES', 'ALL_CHOICES', 'ALL_GROUPED_CHOICES']
 
 
 def _label_zone(zone):
@@ -30,15 +30,36 @@ def _group_choices(zones):
         yield _(group), choices
 
 
-def _flatten_grouped_choices(groups):
+def _flatten_choices(groups):
     for _group, choices in groups:
         # yield from choices
         for choice, value in choices:
             yield choice, value
 
 
-COMMON_GROUPED_CHOICES = list(_group_choices(pytz.common_timezones))
-COMMON_FLAT_CHOICES = list(_flatten_grouped_choices(COMMON_GROUPED_CHOICES))
+class TimezoneChoices(object):
+    def __init__(self, name, grouped=False):
+        self.name = name
+        self.grouped = grouped
+        zones = getattr(pytz, "%s_timezones" % name)
+        choices = _group_choices(zones)
+        if not grouped:
+            choices = _flatten_choices(choices)
+        self._choices = list(choices)
 
-ALL_GROUPED_CHOICES = list(_group_choices(pytz.all_timezones))
-ALL_FLAT_CHOICES = list(_flatten_grouped_choices(ALL_GROUPED_CHOICES))
+    def __iter__(self):
+        return iter(self._choices)
+
+    def __getitem__(self, key):
+        return self._choices[key]
+
+    def deconstruct(self):
+        kwargs = {'grouped': True} if self.grouped else {}
+        return 'sundial.zones.TimezoneChoices', (self.name,), kwargs
+
+
+COMMON_CHOICES = TimezoneChoices('common')
+COMMON_GROUPED_CHOICES = TimezoneChoices('common', grouped=True)
+
+ALL_CHOICES = TimezoneChoices('all')
+ALL_GROUPED_CHOICES = TimezoneChoices('all', grouped=True)

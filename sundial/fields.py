@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.encoding import force_text
 from django.utils.six import with_metaclass
 
-from .settings import TIMEZONE_CHOICES
+from . import forms
 from .utils import coerce_timezone
 
 
@@ -16,7 +16,6 @@ class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
     default_max_length = 42
 
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('choices', TIMEZONE_CHOICES)
         kwargs.setdefault('max_length', self.default_max_length)
         super(TimezoneField, self).__init__(*args, **kwargs)
 
@@ -44,8 +43,6 @@ class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
 
     def deconstruct(self):
         name, path, args, kwargs = super(TimezoneField, self).deconstruct()
-        if kwargs.get('choices') == TIMEZONE_CHOICES:
-            del kwargs['choices']
         if kwargs.get('max_length') == self.default_max_length:
             del kwargs['max_length']
         return name, path, args, kwargs
@@ -57,3 +54,8 @@ class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
         if self.max_length == self.default_max_length:
             del kwargs['max_length']
         return 'sundial.fields.TimezoneField', args, kwargs
+
+    def formfield(self, **kwargs):
+        kwargs.setdefault('form_class', forms.TimezoneField)
+        kwargs.setdefault('choices_form_class', forms.TimezoneChoiceField)
+        return super(TimezoneField, self).formfield(**kwargs)

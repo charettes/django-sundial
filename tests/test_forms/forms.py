@@ -5,7 +5,13 @@ from django import forms
 from .models import TimezoneModel
 
 
-class TimezoneModelForm(forms.ModelForm):
+class TimezoneFieldModelForm(forms.ModelForm):
     class Meta:
         model = TimezoneModel
         fields = ['timezone']
+
+
+class TimezoneChoiceFieldModelForm(forms.ModelForm):
+    class Meta:
+        model = TimezoneModel
+        fields = ['choices_timezone']

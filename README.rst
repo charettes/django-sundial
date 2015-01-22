@@ -22,7 +22,6 @@ Usage
 .. code:: python
 
     # settings.py
-
     TIME_ZONE = 'America/Chicago'
     AUTH_USER_MODEL = 'app.User'
     MIDDLEWARE_CLASSES = [
@@ -36,7 +35,6 @@ Usage
 .. code:: python
 
     # app/models.py
-
     from django.conf import settings
     from django.contrib.auth.models import AbstractUser
     from django.contrib.auth.signals import user_logged_in

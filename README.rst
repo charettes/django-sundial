@@ -3,9 +3,15 @@ django-sundial
 
 .. image:: https://travis-ci.org/charettes/django-sundial.svg?branch=master
     :target: https://travis-ci.org/charettes/django-sundial
+    :alt: Build Status
 
 .. image:: https://coveralls.io/repos/charettes/django-sundial/badge.svg?branch=master
-    :target: https://coveralls.io/r/charettes/django-sundial?branch=master 
+    :target: https://coveralls.io/r/charettes/django-sundial?branch=master
+    :alt: Coverage Status
+
+.. image:: https://pypip.in/wheel/django-sundial/badge.svg
+    :target: https://pypi.python.org/pypi/django-sundial/
+    :alt: Wheel Status
 
 Django application providing database, form fields and middleware for timezone support.
 

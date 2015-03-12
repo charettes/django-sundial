@@ -19,7 +19,7 @@ class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
         kwargs.setdefault('max_length', self.default_max_length)
         super(TimezoneField, self).__init__(*args, **kwargs)
 
-    def from_db_value(self, value, connection, context):
+    def from_db_value(self, value, expression, connection, context):
         if value:
             value = coerce_timezone(value)
         return value

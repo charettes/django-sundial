@@ -10,7 +10,6 @@ from sundial.zones import ALL_CHOICES
 
 from .forms import TimezoneFieldModelForm, TimezoneChoiceFieldModelForm
 
-
 default_timezone = pytz.timezone(settings.TIME_ZONE)
 
 

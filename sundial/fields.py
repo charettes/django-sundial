@@ -47,14 +47,6 @@ class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
             del kwargs['max_length']
         return name, path, args, kwargs
 
-    def south_field_triple(self):
-        """Provide a suitable description of this field for South."""
-        from south.modelsinspector import introspector
-        args, kwargs = introspector(self)
-        if self.max_length == self.default_max_length:
-            del kwargs['max_length']
-        return 'sundial.fields.TimezoneField', args, kwargs
-
     def formfield(self, **kwargs):
         kwargs.setdefault('form_class', forms.TimezoneField)
         kwargs.setdefault('choices_form_class', forms.TimezoneChoiceField)

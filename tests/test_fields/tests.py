@@ -1,11 +1,6 @@
 from __future__ import unicode_literals
 
-# TODO: Remove when support for Python 2.6 is dropped
-import sys
-if sys.version_info >= (2, 7):
-    from unittest import skipIf, skipUnless
-else:
-    from django.utils.unittest import skipIf, skipUnless
+from unittest import skipUnless
 
 import django
 from django.conf import settings
@@ -17,12 +12,6 @@ from sundial.fields import TimezoneField
 from sundial.zones import COMMON_GROUPED_CHOICES
 
 from .models import TimezoneModel
-
-try:
-    import south
-except ImportError:
-    south = None
-
 
 default_timezone = pytz.timezone(settings.TIME_ZONE)
 
@@ -56,21 +45,6 @@ class TimezoneFieldTests(TestCase):
         self.assertEqual(path, 'sundial.fields.TimezoneField')
         self.assertEqual(args, [])
         self.assertEqual(kwargs, {'choices': choices, 'max_length': 30, 'default': 'America/Montreal'})
-
-    @skipIf(south is None, 'South is not installed.')
-    def test_south_field_triple(self):
-        field = TimezoneField()
-        path, args, kwargs = field.south_field_triple()
-        self.assertEqual(path, 'sundial.fields.TimezoneField')
-        self.assertEqual(args, [])
-        self.assertEqual(kwargs, {})
-
-        default = 'America/Montreal'
-        field = TimezoneField(max_length=30, default=default)
-        path, args, kwargs = field.south_field_triple()
-        self.assertEqual(path, 'sundial.fields.TimezoneField')
-        self.assertEqual(args, [])
-        self.assertEqual(kwargs, {'max_length': repr(30), 'default': repr(default)})
 
     def test_full_clean(self):
         # Test zone validation.

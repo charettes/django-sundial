@@ -8,7 +8,6 @@ from django.utils.six import with_metaclass
 from . import forms
 from .utils import coerce_timezone
 
-
 TimezoneFieldBase = type if django.VERSION >= (1, 8) else models.SubfieldBase
 
 

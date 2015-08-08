@@ -1,14 +1,15 @@
 from __future__ import unicode_literals
 
+import pytz
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-import pytz
 
-from sundial.forms import TimezoneField, TimezoneChoiceField
+from sundial.forms import TimezoneChoiceField, TimezoneField
 from sundial.zones import ALL_CHOICES
 
-from .forms import TimezoneFieldModelForm, TimezoneChoiceFieldModelForm
+from .forms import TimezoneChoiceFieldModelForm, TimezoneFieldModelForm
+
 
 default_timezone = pytz.timezone(settings.TIME_ZONE)
 

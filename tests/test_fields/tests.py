@@ -3,15 +3,16 @@ from __future__ import unicode_literals
 from unittest import skipUnless
 
 import django
+import pytz
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-import pytz
 
 from sundial.fields import TimezoneField
 from sundial.zones import COMMON_GROUPED_CHOICES
 
 from .models import TimezoneModel
+
 
 default_timezone = pytz.timezone(settings.TIME_ZONE)
 

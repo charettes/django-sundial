@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
 
 from datetime import datetime
+
+import pytz
 from django.test import SimpleTestCase
 from django.utils.encoding import force_text
-import pytz
 
 from sundial import zones
 

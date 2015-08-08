@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 from datetime import datetime
 from itertools import groupby
 
-from django.utils.functional import lazy
-from django.utils import six
-from django.utils.translation import ugettext_lazy as _
 import pytz
+from django.utils import six
+from django.utils.functional import lazy
+from django.utils.translation import ugettext_lazy as _
 
 __all__ = ['COMMON_CHOICES', 'COMMON_GROUPED_CHOICES', 'ALL_CHOICES', 'ALL_GROUPED_CHOICES']
 

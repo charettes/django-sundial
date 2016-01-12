@@ -21,6 +21,9 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
+        'Framework :: Django :: 1.7',
+        'Framework :: Django :: 1.8',
+        'Framework :: Django :: 1.9',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
@@ -32,6 +35,7 @@ setup(
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: Internet :: WWW/HTTP',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Internet :: WWW/HTTP :: WSGI',
@@ -40,9 +44,8 @@ setup(
     ],
     keywords=['django timezone'],
     packages=find_packages(exclude=['tests', 'tests.*']),
-    install_requires=['django>=1.6', 'pytz'],
+    install_requires=['django>=1.7', 'pytz'],
     extras_require={
-        'south': ['south'],
         'tests': ['tox'],
     },
 )

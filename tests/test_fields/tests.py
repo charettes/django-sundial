@@ -1,8 +1,5 @@
 from __future__ import unicode_literals
 
-from unittest import skipUnless
-
-import django
 import pytz
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -29,7 +26,6 @@ class TimezoneFieldTests(TestCase):
         obj = TimezoneModel.objects.create(timezone=default_timezone)
         self.assertEqual(TimezoneModel.objects.get(timezone=default_timezone), obj)
 
-    @skipUnless(django.VERSION >= (1, 7, 0), 'Field deconstruction is only supported on Django >= 1.7.0')
     def test_deconstruct(self):
         field = TimezoneField(name='timezone')
         name, path, args, kwargs = field.deconstruct()

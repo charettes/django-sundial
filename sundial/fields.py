@@ -7,6 +7,7 @@ from django.utils.six import with_metaclass
 
 from . import forms
 from .utils import coerce_timezone
+from .zones import TimezoneChoices
 
 TimezoneFieldBase = type if django.VERSION >= (1, 8) else models.SubfieldBase
 
@@ -44,6 +45,9 @@ class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
         name, path, args, kwargs = super(TimezoneField, self).deconstruct()
         if kwargs.get('max_length') == self.default_max_length:
             del kwargs['max_length']
+        choices = self.choices
+        if isinstance(choices, TimezoneChoices):
+            kwargs['choices'] = choices
         return name, path, args, kwargs
 
     def formfield(self, **kwargs):

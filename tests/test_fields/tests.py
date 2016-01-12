@@ -27,6 +27,7 @@ class TimezoneFieldTests(TestCase):
         self.assertEqual(TimezoneModel.objects.get(timezone=default_timezone), obj)
 
     def test_deconstruct(self):
+        # Basic deconstruction.
         field = TimezoneField(name='timezone')
         name, path, args, kwargs = field.deconstruct()
         self.assertEqual(name, 'timezone')
@@ -34,14 +35,21 @@ class TimezoneFieldTests(TestCase):
         self.assertEqual(args, [])
         self.assertEqual(kwargs, {})
 
-        default = 'America/Montreal'
-        choices = [(default, 'Montreal')]
-        field = TimezoneField(name='timezone', choices=choices, max_length=30, default=default)
+        # max_length override.
+        field = TimezoneField(name='timezone', max_length=30)
         name, path, args, kwargs = field.deconstruct()
         self.assertEqual(name, 'timezone')
         self.assertEqual(path, 'sundial.fields.TimezoneField')
         self.assertEqual(args, [])
-        self.assertEqual(kwargs, {'choices': choices, 'max_length': 30, 'default': 'America/Montreal'})
+        self.assertEqual(kwargs, {'max_length': 30})
+
+        # TimezoneChoices choices.
+        field = TimezoneField(name='timezone', choices=COMMON_GROUPED_CHOICES)
+        name, path, args, kwargs = field.deconstruct()
+        self.assertEqual(name, 'timezone')
+        self.assertEqual(path, 'sundial.fields.TimezoneField')
+        self.assertEqual(args, [])
+        self.assertEqual(kwargs, {'choices': COMMON_GROUPED_CHOICES})
 
     def test_full_clean(self):
         # Test zone validation.

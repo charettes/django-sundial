@@ -44,7 +44,7 @@ setup(
     ],
     keywords=['django timezone'],
     packages=find_packages(exclude=['tests', 'tests.*']),
-    install_requires=['django>=1.7', 'pytz'],
+    install_requires=['Django>=1.7', 'pytz'],
     extras_require={
         'tests': ['tox'],
     },

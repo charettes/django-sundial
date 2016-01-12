@@ -1,10 +1,10 @@
 from __future__ import unicode_literals
 
-from sundial.versioning import get_version
+from django.utils import version
 
 
 __all__ = ['VERSION', '__version__']
 
 VERSION = (1, 0, 2, 'alpha', 0)
 
-__version__ = get_version(VERSION)
+__version__ = version.get_version(VERSION)

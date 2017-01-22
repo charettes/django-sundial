@@ -21,7 +21,6 @@ setup(
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 1.7',
         'Framework :: Django :: 1.8',
         'Framework :: Django :: 1.9',
         'Intended Audience :: Developers',
@@ -44,7 +43,7 @@ setup(
     ],
     keywords=['django timezone'],
     packages=find_packages(exclude=['tests', 'tests.*']),
-    install_requires=['Django>=1.7', 'pytz'],
+    install_requires=['Django>=1.8', 'pytz'],
     extras_require={
         'tests': ['tox'],
     },

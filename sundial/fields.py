@@ -1,18 +1,14 @@
 from __future__ import unicode_literals
 
-import django
 from django.db import models
 from django.utils.encoding import force_text
-from django.utils.six import with_metaclass
 
 from . import forms
 from .utils import coerce_timezone
 from .zones import TimezoneChoices
 
-TimezoneFieldBase = type if django.VERSION >= (1, 8) else models.SubfieldBase
 
-
-class TimezoneField(with_metaclass(TimezoneFieldBase, models.CharField)):
+class TimezoneField(models.CharField):
     default_max_length = 42
 
     def __init__(self, *args, **kwargs):

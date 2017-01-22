@@ -18,6 +18,7 @@ def _label_zone(zone):
         'offset': offset,
     }
 
+
 _lazy_label_zone = lazy(_label_zone, six.text_type)
 
 

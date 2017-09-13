@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import pytz
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.utils.text import force_text
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
 TIMEZONE_SESSION_KEY = getattr(

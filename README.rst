@@ -42,7 +42,7 @@ Usage
     # settings.py
     TIME_ZONE = 'America/Chicago'
     AUTH_USER_MODEL = 'app.User'
-    MIDDLEWARE_CLASSES = [
+    MIDDLEWARE = [
         ...,
         'django.contrib.sessions.middleware.SessionMiddleware',
         ...,

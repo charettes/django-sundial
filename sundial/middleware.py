@@ -4,8 +4,13 @@ from django.utils import timezone
 
 from .utils import get_session_timezone
 
+try:
+    from django.utils.deprecation import MiddlewareMixin
+except ImportError:
+    MiddlewareMixin = object
 
-class TimezoneMiddleware(object):
+
+class TimezoneMiddleware(MiddlewareMixin):
     """Middleware that sets the current timezone from a session stored value.
 
     Use ``sundial.utils.set_session_timezone()`` to store a user based value

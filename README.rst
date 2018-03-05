@@ -1,11 +1,11 @@
 django-sundial
 ==============
 
-.. image:: https://pypip.in/license/django-sundial/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/l/django-sundial.svg?style=flat
     :target: https://pypi.python.org/pypi/django-sundial/
     :alt: License
 
-.. image:: https://pypip.in/version/django-sundial/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/v/django-sundial.svg?style=flat
     :target: https://pypi.python.org/pypi/django-sundial/
     :alt: Latest Version
 
@@ -17,11 +17,11 @@ django-sundial
     :target: https://coveralls.io/r/charettes/django-sundial?branch=master
     :alt: Coverage Status
 
-.. image:: https://pypip.in/py_versions/django-sundial/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/pyversions/django-sundial.svg?style=flat
     :target: https://pypi.python.org/pypi/django-sundial/
     :alt: Supported Python Versions
 
-.. image:: https://pypip.in/wheel/django-sundial/badge.svg?style=flat
+.. image:: https://img.shields.io/pypi/wheel/django-sundial.svg?style=flat
     :target: https://pypi.python.org/pypi/django-sundial/
     :alt: Wheel Status
 

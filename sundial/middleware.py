@@ -1,13 +1,9 @@
 from __future__ import unicode_literals
 
 from django.utils import timezone
+from django.utils.deprecation import MiddlewareMixin
 
 from .utils import get_session_timezone
-
-try:
-    from django.utils.deprecation import MiddlewareMixin
-except ImportError:
-    MiddlewareMixin = object
 
 
 class TimezoneMiddleware(MiddlewareMixin):

@@ -1,5 +1,6 @@
 syntax:glob
 *.py[co]
+build/
 dist/
 django_sundial.egg-info/*
 .coverage

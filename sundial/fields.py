@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import django
 from django.db import models
 from django.utils.encoding import force_text
 
@@ -15,10 +16,16 @@ class TimezoneField(models.CharField):
         kwargs.setdefault('max_length', self.default_max_length)
         super(TimezoneField, self).__init__(*args, **kwargs)
 
-    def from_db_value(self, value, expression, connection, context):
-        if value:
-            value = coerce_timezone(value)
-        return value
+    if django.VERSION >= (2, 0):
+        def from_db_value(self, value, expression, connection):
+            if value:
+                value = coerce_timezone(value)
+            return value
+    else:
+        def from_db_value(self, value, expression, connection, context):
+            if value:
+                value = coerce_timezone(value)
+            return value
 
     def to_python(self, value):
         value = super(TimezoneField, self).to_python(value)

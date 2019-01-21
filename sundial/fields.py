@@ -16,16 +16,16 @@ class TimezoneField(models.CharField):
         kwargs.setdefault('max_length', self.default_max_length)
         super(TimezoneField, self).__init__(*args, **kwargs)
 
+    def _from_db_value(self, value, expression, connection):
+        if value:
+            value = coerce_timezone(value)
+        return value
+
     if django.VERSION >= (2, 0):
-        def from_db_value(self, value, expression, connection):
-            if value:
-                value = coerce_timezone(value)
-            return value
+        from_db_value = _from_db_value
     else:
         def from_db_value(self, value, expression, connection, context):
-            if value:
-                value = coerce_timezone(value)
-            return value
+            return self._from_db_value(value, expression, connection)
 
     def to_python(self, value):
         value = super(TimezoneField, self).to_python(value)

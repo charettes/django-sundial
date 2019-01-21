@@ -16,5 +16,3 @@ INSTALLED_APPS = [
     'tests.test_fields',
     'tests.test_forms',
 ]
-
-SILENCED_SYSTEM_CHECKS = ['1_7.W001']

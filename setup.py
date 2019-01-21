@@ -4,7 +4,6 @@ from setuptools import find_packages, setup
 
 import sundial
 
-
 with open('README.rst') as file_:
     long_description = file_.read()
 
@@ -24,6 +23,7 @@ setup(
         'Framework :: Django :: 1.11',
         'Framework :: Django :: 2.0',
         'Framework :: Django :: 2.1',
+        'Framework :: Django :: 2.2',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',

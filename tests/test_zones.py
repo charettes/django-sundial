@@ -1,10 +1,8 @@
-from __future__ import unicode_literals
-
 from datetime import datetime
 
 import pytz
 from django.test import SimpleTestCase
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from sundial import zones
 
@@ -13,7 +11,7 @@ class TimezoneChoicesTests(SimpleTestCase):
     def test_label_offset(self):
         for value, label in zones.ALL_CHOICES:
             offset = datetime.now(pytz.timezone(value)).strftime('%z')
-            self.assertIn(offset, force_text(label))
+            self.assertIn(offset, force_str(label))
 
     def test_slicing(self):
         self.assertEqual(len(zones.ALL_CHOICES[0:3]), 3)

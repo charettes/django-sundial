@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import pytz
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -9,7 +7,6 @@ from sundial.fields import TimezoneField
 from sundial.zones import COMMON_GROUPED_CHOICES
 
 from .models import TimezoneModel
-
 
 default_timezone = pytz.timezone(settings.TIME_ZONE)
 

@@ -1,12 +1,9 @@
-from __future__ import unicode_literals
-
 from datetime import datetime
 from itertools import groupby
 
 import pytz
-from django.utils import six
 from django.utils.functional import lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 __all__ = ['COMMON_CHOICES', 'COMMON_GROUPED_CHOICES', 'ALL_CHOICES', 'ALL_GROUPED_CHOICES']
 
@@ -19,26 +16,23 @@ def _label_zone(zone):
     }
 
 
-_lazy_label_zone = lazy(_label_zone, six.text_type)
+_lazy_label_zone = lazy(_label_zone, str)
 
 
 def _group_choices(zones):
-    groups = groupby(six.moves.map(lambda z: z.split('/'), zones), lambda z: z[0])
+    groups = groupby(map(lambda z: z.split('/'), zones), lambda z: z[0])
     for group, regions in groups:
-        choices = list(
+        yield _(group), [
             ('/'.join(region), _lazy_label_zone(region)) for region in regions
-        )
-        yield _(group), choices
+        ]
 
 
 def _flatten_choices(groups):
     for _group, choices in groups:
-        # yield from choices
-        for choice, value in choices:
-            yield choice, value
+        yield from choices
 
 
-class TimezoneChoices(object):
+class TimezoneChoices:
     def __init__(self, name, grouped=False):
         self.name = name
         self.grouped = grouped

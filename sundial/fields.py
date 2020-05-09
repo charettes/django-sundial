@@ -1,8 +1,5 @@
-from __future__ import unicode_literals
-
-import django
 from django.db import models
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 from . import forms
 from .utils import coerce_timezone
@@ -14,38 +11,32 @@ class TimezoneField(models.CharField):
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('max_length', self.default_max_length)
-        super(TimezoneField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
-    if django.VERSION >= (2, 0):
-        def from_db_value(self, value, expression, connection):
-            if value:
-                value = coerce_timezone(value)
-            return value
-    else:
-        def from_db_value(self, value, expression, connection, context):
-            if value:
-                value = coerce_timezone(value)
-            return value
+    def from_db_value(self, value, expression, connection):
+        if value:
+            value = coerce_timezone(value)
+        return value
 
     def to_python(self, value):
-        value = super(TimezoneField, self).to_python(value)
+        value = super().to_python(value)
         if value:
             value = coerce_timezone(value)
         return value
 
     def validate(self, value, model_instance):
-        super(TimezoneField, self).validate(force_text(value), model_instance)
+        super().validate(force_str(value), model_instance)
 
     def run_validators(self, value):
-        super(TimezoneField, self).run_validators(force_text(value))
+        super().run_validators(force_str(value))
 
     def get_prep_value(self, value):
         if value is not None:
-            value = force_text(value)
+            value = force_str(value)
         return value
 
     def deconstruct(self):
-        name, path, args, kwargs = super(TimezoneField, self).deconstruct()
+        name, path, args, kwargs = super().deconstruct()
         if kwargs.get('max_length') == self.default_max_length:
             del kwargs['max_length']
         choices = self.choices
@@ -56,4 +47,4 @@ class TimezoneField(models.CharField):
     def formfield(self, **kwargs):
         kwargs.setdefault('form_class', forms.TimezoneField)
         kwargs.setdefault('choices_form_class', forms.TimezoneChoiceField)
-        return super(TimezoneField, self).formfield(**kwargs)
+        return super().formfield(**kwargs)
